@@ -1,0 +1,3 @@
+Z_ba_1.trs = regels die gebruik maken van gehele getallen (Z), een binair systeem(ba), eerste versie (1)
+Z_da_2.trs = gehele getallen (Z), decimaal systeem (da), 2de versie met vervangen min regel
+Z_da_2_exp.trs = de expanded versie van de vorige regel
