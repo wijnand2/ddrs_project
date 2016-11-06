@@ -12,4 +12,8 @@ Terminatie
 
 - Tyrolean: http://cl-informatik.uibk.ac.at/software/ttt2/ 
 
+Complexiteit
+
+- http://cl-informatik.uibk.ac.at/software/cat/
+
 Overzicht tools: https://www.jaist.ac.jp/~hirokawa/tool/
