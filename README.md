@@ -10,10 +10,14 @@ Terminatie
 
 - Aprove: http://aprove.informatik.rwth-aachen.de/index.asp?subform=termination_proofs.html
 
-- Tyrolean: http://cl-informatik.uibk.ac.at/software/ttt2/ 
+- TTT2: http://cl-informatik.uibk.ac.at/software/ttt2/ 
 
 Complexiteit
 
-- http://cl-informatik.uibk.ac.at/software/cat/
+- CaT: http://cl-informatik.uibk.ac.at/software/cat/
+
+Knuth-Bendix completion algorithme
+
+- KBCV: http://cl-informatik.uibk.ac.at/software/kbcv/
 
 Overzicht tools: https://www.jaist.ac.jp/~hirokawa/tool/
