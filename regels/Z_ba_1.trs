@@ -45,7 +45,7 @@ P(ba1(x)) -> ba0(x)
 
 P(neg(x)) -> neg(S(x))
 
-S(neg(1))
+S(neg(1)) -> 0
 
 S(neg(ba0(x))) -> neg(ba1(P(x)))
 

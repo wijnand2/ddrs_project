@@ -1,5 +1,4 @@
 (VAR x y)
-(RULES
 
 ba0(0) -> 0
 ba1(0) -> 1
@@ -66,7 +65,7 @@ P(ba1(x)) -> ba0(x)
 
 P(neg(x)) -> neg(S(x))
 
-S(neg(1)) -> 0
+S(neg(1))
 
 S(neg(ba0(x))) -> neg(ba1(P(x)))
 
@@ -76,22 +75,15 @@ ba0(neg(x)) -> neg(ba0(x))
 
 ba1(neg(x)) -> neg(ba1(P(x)))
 
-plus(x, neg(1)) -> P(x)
+plus(x, neg(y)) -> plus(neg(x), y)
 
 plus(neg(1), x) -> P(x)
-
-plus(ba0(x), neg(ba0(y))) -> ba0(plus(x, neg(y)))
-plus(ba0(x), neg(ba1(y))) -> P(ba0(plus(x, neg(y))))
-plus(ba1(x), neg(ba0(y))) -> ba1(plus(x, neg(y)))
-plus(ba1(x), neg(ba1(y))) -> P(ba1(plus(x, neg(y))))
 
 plus(neg(ba0(y)), ba0(x)) -> ba0(plus(x, neg(y)))
 plus(neg(ba1(y)), ba0(x)) -> P(ba0(plus(x, neg(y))))
 plus(neg(ba0(y)), ba1(x)) -> ba1(plus(x, neg(y)))
 plus(neg(ba1(y)), ba1(x)) -> P(ba1(plus(x, neg(y))))
 
-plus(neg(x), neg(y)) -> neg(plus(x, y))
-
 mult(x, neg(y)) -> neg(mult(x, y))
 
-)
+ba1(P(plus(neg(P(x)),y))) -> ba1(plus(neg(x), y))
