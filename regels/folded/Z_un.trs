@@ -1,6 +1,5 @@
-(VAR x y z)
+(VAR x y)
 (RULES
-
 
 plus(x, 0) -> x
 
@@ -12,7 +11,7 @@ mult(x, S(y)) -> plus(mult(x, y), x)
 
 neg(0) -> 0
 
-S(neg(S(x))) = neg(x)
+S(neg(S(x))) -> neg(x)
 
 neg(neg(x)) -> x
 
@@ -29,24 +28,4 @@ P(0) -> neg(S(0))
 P(S(x)) -> x
 
 P(neg(x)) -> neg(S(x))
-
-plus(x, plus(y, z)) -> plus(plus(x, y), z)
-
-plus(x, y) -> plus(y, x)
-
-plus(x, 0) -> x
-
-plus(x, neg(x)) -> 0
-
-mult(mult(x, y), z) -> mult(x, mult(y, z))
-
-mult(x, y) -> mult(y, x)
-
-mult(1, x) -> x
-
-mult(x, plus(y, z)) -> plus(mult(x, y), mult(x, z))
-
-S(x) -> plus(x, 1)
-
-P(x) -> plus(x, neg(1))
 )

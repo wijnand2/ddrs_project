@@ -1,0 +1,20 @@
+Z_ba_exp.trs (onze binary append) 
+confluence: open proof, ofwel, “MAYBE”
+terminatie: proven 
+
+Z_da_exp.trs (onze decimal append) 
+confluence: open proof, ofwel, “MAYBE”
+terminatie: proven (op wijnands computer), duurt te lang online
+
+Z_un_exp.trs (onze unary system)
+confluence: Niet confluent. Zie bestand “non-confluence-unary.txt” in de regels map.
+terminatie: Niet terminerend. 
+
+Z_btree_exp.trs (onze binary tree) 
+confluence: 
+terminatie:
+
+Z_dtree_exp.trs (onze decimal tree) 
+confluence: 
+terminatie:
+
