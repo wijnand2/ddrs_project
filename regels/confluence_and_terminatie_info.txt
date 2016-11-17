@@ -2,4 +2,7 @@ Z_ba_1_exp
 Terminatie = Yes 
 Confluence = Maybe namelijk Proof: Open
 
-Z_da_1_exp
+Z_btree_1_exp = Termination proven:
+Z_btree_2_exp = terminatie proven: 
+
+Z

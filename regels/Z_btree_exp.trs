@@ -1,0 +1,53 @@
+(VAR x y z)
+(RULES
+
+
+bat(0,x) -> x
+
+bat(x,bat(y,z)) -> bat(plus(x,y),z)
+
+plus(0,x) -> x
+
+plus(x,0) -> x
+
+plus(1,1) -> bat(1,0)
+
+plus(x, bat(y,z)) -> bat(y, plus(x,z))
+
+plus(bat(x,y), z) -> plus(x, plus(y,z))
+
+mult(x,0)  -> 0
+
+mult(0,x) -> 0
+
+mult(1,1) -> 1
+
+mult(x,bat(y,z)) -> bat(mult(x,y), mult(x,z))
+
+mult(bat(x,y), z) -> bat(mult(x,z), mult(y,z))
+
+neg(0) -> 0
+
+neg(neg(x)) -> x
+
+bat(1, neg(1)) -> 1
+
+bat(bat(x,0), neg(1)) -> bat(bat(x,neg(1)),1)
+
+bat(bat(x,1), neg(1)) ->  bat(bat(x,0),1)
+
+bat(x,neg(bat(y,z))) -> neg(bat(plus(y,neg(x)),z))
+
+bat(neg(x), y) -> neg(bat(x,neg(y)))
+
+plus(neg(1), 1) -> 0
+
+plus(neg(bat(x,y)),z) -> neg(bat(x, plus(y, neg(z))))
+
+mult(x, neg(y)) -> neg(mult(x,y))
+
+mult(neg(x), y) -> neg(mult(x,y))
+
+plus(x, neg(y)) -> neg(plus(neg(x), y))
+
+)
