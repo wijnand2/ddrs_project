@@ -10,7 +10,9 @@ S(9) = da0(1)
 [i]{0, 8} S(dai(x)) = dai'(x)
 
 S(da9(x)) = da0(S(x))
+
 plus(x, 0) = x
+
 plus(0, x) = x
 
 [i]{1, 9} plus(x, i) = S_i(x)
@@ -25,7 +27,7 @@ mult(x, 0) = 0
 
 [i]{0, 9} mult(x, dai(y)) = plus(da0(mult(x,y)), mult(x,i))
 
-[i]{0, 1} dai(x) = plus(plus(x,x), i)
+[i]{0, 1} bai(x) = plus(plus(x,x), i)
 
 neg(0) = 0
 neg(neg(x)) = x
@@ -58,6 +60,7 @@ da0(neg(x)) = neg(da0(x))
 [i,j]{0, 9} plus(neg(daj(y)), dai(x)) = P_j(dai(plus(x,neg(y))))
 
 plus(neg(x), neg(y)) = neg(plus(x,y))
+
 mult(x,neg(y)) = neg(mult(x,y))
 
 )

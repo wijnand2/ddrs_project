@@ -35,7 +35,9 @@ S(da7(x)) -> da8(x)
 S(da8(x)) -> da9(x)
 
 S(da9(x)) -> da0(S(x))
+
 plus(x, 0) -> x
+
 plus(0, x) -> x
 
 plus(x, 1) -> S(x)
@@ -182,8 +184,8 @@ mult(x, da7(y)) -> plus(da0(mult(x,y)), mult(x,7))
 mult(x, da8(y)) -> plus(da0(mult(x,y)), mult(x,8))
 mult(x, da9(y)) -> plus(da0(mult(x,y)), mult(x,9))
 
-da0(x) -> plus(plus(x,x), 0)
-da1(x) -> plus(plus(x,x), 1)
+ba0(x) -> plus(plus(x,x), 0)
+ba1(x) -> plus(plus(x,x), 1)
 
 neg(0) -> 0
 neg(neg(x)) -> x
@@ -470,6 +472,7 @@ plus(neg(da8(y)), da9(x)) -> P(P(P(P(P(P(P(P(da9(plus(x,neg(y)))))))))))
 plus(neg(da9(y)), da9(x)) -> P(P(P(P(P(P(P(P(P(da9(plus(x,neg(y))))))))))))
 
 plus(neg(x), neg(y)) -> neg(plus(x,y))
+
 mult(x,neg(y)) -> neg(mult(x,y))
 
 )

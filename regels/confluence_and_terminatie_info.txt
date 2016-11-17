@@ -1,0 +1,5 @@
+Z_ba_1_exp
+Terminatie = Yes 
+Confluence = Maybe namelijk Proof: Open
+
+Z_da_1_exp
