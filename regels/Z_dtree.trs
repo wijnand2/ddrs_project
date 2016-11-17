@@ -1,0 +1,68 @@
+(VAR x y z)
+(RULES
+
+dt(0, x) = x
+
+dt(x, dt(y, z)) = dt(plus(x, y), z)
+
+[i]{0,8} S(i) = i'
+
+S(9) = dt(1, 0)
+
+[i]{0,8} S(dt(x, i)) = dt(x, i')
+
+S(dt(x, 9)) = dt(S(x), 0)
+
+[i]{0,9} plus(x, i) = S_i(x)
+
+[i]{0,9} plus(x, dt(y, i)) = S_i(dt(y, x))
+
+mult(x, 0) = 0
+
+mult(x, 1) = x
+mult(x, 2) = plus(x,x)
+mult(x, 3) = plus(x, plus(x, x))
+mult(x, 4) = plus(x, plus(x, plus(x, x)))
+mult(x, 5) = plus(x, plus(x, plus(x, plus(x, x))))
+mult(x, 6) = plus(x, plus(x, plus(x, plus(x, plus(x, x)))))
+mult(x, 7) = plus(x, plus(x, plus(x, plus(x, plus(x, plus(x, x))))))
+mult(x, 8) = plus(x, plus(x, plus(x, plus(x, plus(x, plus(x, plus(x, x)))))))
+mult(x, 9) = plus(x, plus(x, plus(x, plus(x, plus(x, plus(x, plus(x, plus(x, x))))))))
+
+[i]{0,9} mult(x, dt(y, i)) = plus(dt(mult(x, y),0), mult(x, i))
+
+neg(0) = 0
+
+neg(neg(x)) = x
+
+P(0) = neg(1)
+
+[i]{0,8} P(i') = i
+
+P(dt(x, 0)) = dt(P(x), 9)
+
+[i]{0,8} P(dt(x, i')) = dt(x, i)
+
+P(neg(x)) = neg(S(x))
+
+[i]{0,8} S(neg(i')) = neg(i)
+
+S(neg(dt(x,0))) = neg(dt(P(x), 9))
+
+[i]{0,8} S(neg(dt(x, i'))) = neg(dt(x, i))
+
+dt(neg(x), y) = neg(dt(x, neg(y)))
+
+[i,j]{1,9} dt(i, neg(j)) = dt(i'', j*)
+
+[i,j]{1,9} dt(dt(x, i), neg(j)) = dt(dt(x, i''), j*)
+
+dt(x, neg(dt(y, z))) = neg(dt(plus(y,neg(x)), z))
+
+[i]{1,9} plus(x, neg(i)) = P_i(x)
+
+plus(x, neg(dt(y, z))) = neg(dt(y, plus(z, neg(x))))
+
+mult(x, neg(y)) = neg(mult(x, y))
+
+)

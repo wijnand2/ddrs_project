@@ -1,4 +1,5 @@
 (VAR x y)
+(RULES
 
 da0(0) -> 0
 da1(0) -> 1
@@ -362,3 +363,5 @@ plus(neg(da8(y)), da9(x)) -> P(P(P(P(P(P(P(P(da9(plus(x,neg(y)))))))))))
 plus(neg(da9(y)), da9(x)) -> P(P(P(P(P(P(P(P(P(da9(plus(x,neg(y))))))))))))
 
 mult(x,neg(y)) -> neg(mult(x,y))
+
+)

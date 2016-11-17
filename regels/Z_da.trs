@@ -30,7 +30,9 @@ mult(x, 0) = 0
 [i]{0, 1} dai(x) = plus(plus(x,x), i)
 
 neg(0) = 0
+
 neg(neg(x)) = x
+
 P(0) = neg(1)
 
 [i]{0, 8} P(i') = i
