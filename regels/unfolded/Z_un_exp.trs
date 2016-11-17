@@ -12,7 +12,7 @@ mult(x, S(y)) -> plus(mult(x, y), x)
 
 neg(0) -> 0
 
-S(neg(S(x))) = neg(x)
+S(neg(S(x))) -> neg(x)
 
 neg(neg(x)) -> x
 

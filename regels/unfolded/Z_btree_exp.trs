@@ -1,7 +1,6 @@
 (VAR x y z)
 (RULES
 
-
 bt(0,x) -> x
 
 bt(x,bt(y,z)) -> bt(plus(x,y),z)
@@ -50,5 +49,4 @@ mult(neg(x), y) -> neg(mult(x,y))
 
 plus(x, neg(y)) -> neg(plus(neg(x), y))
 
-plus(x, plus(y, z)) -> plus(plus(x, y), z)
 )

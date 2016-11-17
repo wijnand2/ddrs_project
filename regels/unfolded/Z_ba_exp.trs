@@ -87,6 +87,4 @@ plus(neg(ba1(y)), ba1(x)) -> P(ba1(plus(x, neg(y))))
 
 mult(x, neg(y)) -> neg(mult(x, y))
 
-ba1(P(plus(neg(P(x)),y))) -> ba1(plus(neg(x), y))
-
 )
