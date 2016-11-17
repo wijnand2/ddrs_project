@@ -1,0 +1,68 @@
+(VAR x y z)
+(RULES
+
+dat(0, x) = x
+
+dat(x, dat(y, z)) = dat(plus(x, y), z)
+
+[i]{0,8} S(i) = i'
+
+S(9) = dat(1, 0)
+
+[i]{0,8} S(dat(x, i)) = dat(x, i')
+
+S(dat(x, 9)) = dat(S(x), 0)
+
+[i]{0,9} plus(x, i) = S_i(x)
+
+[i]{0,9} plus(x, dat(y, i)) = S_i(dat(y, x))
+
+mult(x, 0) = 0
+
+mult(x, 1) = x
+mult(x, 2) = plus(x,x)
+mult(x, 3) = plus(x, plus(x, x))
+mult(x, 4) = plus(x, plus(x, plus(x, x)))
+mult(x, 5) = plus(x, plus(x, plus(x, plus(x, x))))
+mult(x, 6) = plus(x, plus(x, plus(x, plus(x, plus(x, x)))))
+mult(x, 7) = plus(x, plus(x, plus(x, plus(x, plus(x, plus(x, x))))))
+mult(x, 8) = plus(x, plus(x, plus(x, plus(x, plus(x, plus(x, plus(x, x)))))))
+mult(x, 9) = plus(x, plus(x, plus(x, plus(x, plus(x, plus(x, plus(x, plus(x, x))))))))
+
+[i]{0,9} mult(x, dat(y, i)) = plus(dat(mult(x, y),0), mult(x, i))
+
+neg(0) = 0
+
+neg(neg(x)) = x
+
+P(0) = neg(1)
+
+[i]{0,8} P(i') = i
+
+P(dat(x, 0)) = dat(P(x), 9)
+
+[i]{0,8} P(dat(x, i')) = dat(x, i)
+
+P(neg(x)) = neg(S(x))
+
+[i]{0,8} S(neg(i')) = neg(i)
+
+S(neg(dat(x,0))) = neg(dat(P(x), 9))
+
+[i]{0,8} S(neg(dat(x, i'))) = neg(dat(x, i))
+
+dat(neg(x), y) = neg(dat(x, neg(y)))
+
+[i,j]{1,9} dat(i, neg(j)) = dat(i'', j*)
+
+[i,j]{1,9} dat(dat(x, i), neg(j)) = dat(dat(x, i''), j*)
+
+dat(x, neg(dat(y, z))) = neg(dat(plus(y,neg(x)), z))
+
+[i]{1,9} plus(x, neg(i)) = P_i(x)
+
+plus(x, neg(dat(y, z))) = neg(dat(y, plus(z, neg(x))))
+
+mult(x, neg(y)) = neg(mult(x, y))
+
+)
