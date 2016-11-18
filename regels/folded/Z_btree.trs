@@ -49,4 +49,9 @@ mult(neg(x), y) -> neg(mult(x,y))
 
 plus(x, neg(y)) -> neg(plus(neg(x), y))
 
+plus(x, plus(y, z)) -> plus(plus(x, y), z)
+
+mult(x, mult(y, z)) -> mult(mult(x, y), z)
+
+mult(x, plus(y, z)) -> plus(mult(x, y), mult(x, z))
 )

@@ -1,23 +1,2 @@
- Nonconfluence Processor:
-  terms: plus(f26(),neg(f8())) *<- plus(neg(neg(f26())),neg(f8())) ->* 
-  neg(plus(neg(f26()),f8()))
-  Qed
+terms: plus(x,neg(x518)) *<- plus(x,S(neg(S(x518)))) ->* S(plus(x,neg(S(x518))))
   
-  first automaton:
-   final states: {629}
-   transitions:
-    plus(631,632) -> 629*
-    plus(632,631) -> 629*
-    neg(630) -> 631*
-    f8() -> 630*
-    f26() -> 632*
-  
-  second automaton:
-   final states: {633}
-   transitions:
-    plus(634,636) -> 637*
-    plus(636,634) -> 637*
-    neg(635) -> 636*
-    neg(637) -> 633*
-    f8() -> 634*
-    f26() -> 635*

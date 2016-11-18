@@ -8,7 +8,7 @@ terminatie: proven (op wijnands computer), duurt te lang online
 
 Z_un_exp.trs (onze unary system)
 confluence: Niet confluent. Zie bestand “non-confluence-unary.txt” in de regels map.
-terminatie: Niet terminerend. 
+terminatie: proven.
 
 Z_btree_exp.trs (onze binary tree) 
 confluence: 
