@@ -13,7 +13,7 @@ plus(1,1) -> bt(1,0)
 
 plus(x, bt(y,z)) -> bt(y, plus(x,z))
 
-plus(bt(x,y), z) -> plus(x, plus(y,z))
+plus(bt(x,y), z) -> bt(x, plus(y,z))
 
 mult(x,0)  -> 0
 
@@ -54,4 +54,7 @@ plus(x, plus(y, z)) -> plus(plus(x, y), z)
 mult(x, mult(y, z)) -> mult(mult(x, y), z)
 
 mult(x, plus(y, z)) -> plus(mult(x, y), mult(x, z))
+
+plus(mult(x, z), mult(y, z)) -> mult(plus(x, y), z)
+
 )
