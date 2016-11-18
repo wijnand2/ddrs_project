@@ -56,5 +56,4 @@ mult(x, mult(y, z)) -> mult(mult(x, y), z)
 mult(x, plus(y, z)) -> plus(mult(x, y), mult(x, z))
 
 plus(mult(x, z), mult(y, z)) -> mult(plus(x, y), z)
-
 )
