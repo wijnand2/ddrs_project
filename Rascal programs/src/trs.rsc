@@ -40,7 +40,7 @@ tuple[str label, Term result] step(S(plus(Term x, Term y))) = <"+1", plus(S(x), 
 tuple[str label, Term result] step(plus(Term x, z())) = <"12", x>;
 tuple[str label, Term result] step(plus(Term x, S(Term y))) = <"13", plus(S(x), y)>;
 tuple[str label, Term result] step(plus(Term x, N(Term y))) = <"14", plus(plus(x, y), y)>;
-tuple[str label, Term result] step(plus(Term x, neg(Term y))) = <"15", neg(plus(neg(x), y))>;
+//tuple[str label, Term result] step(plus(Term x, neg(Term y))) = <"15", neg(plus(neg(x), y))>;
 
 //tuple[str label, Term result] step(plus(Term x, z())) = <"*1", x>;
 //tuple[str label, Term result] step(plus(z(), Term x)) = <"*2", x>;
@@ -49,17 +49,17 @@ tuple[str label, Term result] step(plus(Term x, neg(Term y))) = <"15", neg(plus(
 //tuple[str label, Term result] step(plus(N(Term x), N(Term y))) = <"*5", N(plus(x, y))>;
 
 tuple[str label, Term result] step(mult(Term x, z())) = <"16", z()>;
-tuple[str label, Term result] step(mult(Term x, S(Term y))) = <"17", plus(mult(x, y), x)>;
+tuple[str label, Term result] step(mult(Term x, S(Term y))) = <"17", plus(x, mult(x, y))>;
 tuple[str label, Term result] step(mult(Term x, N(Term y))) = <"18", mult(N(x), y)>;
-tuple[str label, Term result] step(mult(Term x, neg(Term y))) = <"19", mult(neg(x), y)>;
+//tuple[str label, Term result] step(mult(Term x, neg(Term y))) = <"19", mult(neg(x), y)>;
 //
 //tuple[str label, Term result] step(S(P(Term x))) = <"+1", x>;
 //tuple[str label, Term result] step(plus(Term x, P(Term y))) = <"+2", plus(P(x), y)>;
 
-tuple[str label, Term result] step(plus(Term x, plus(Term w, Term v)))
-	 = <"+c1", plus(plus(x, w), v)>;
-tuple[str label, Term result] step(mult(Term x, plus(S(Term w), Term v)))
-	 = <"+c2", plus(mult(x, plus(w, v)), x)>;
+tuple[str label, Term result] step(plus(Term x, plus(Term w, Term v))) = <"+c1", plus(plus(x, w), v)>;
+tuple[str label, Term result] step(mult(x, plus(y, z))) = <"+c2", plus(mult(x, y), mult(x, z))>;
+//tuple[str label, Term result] step(mult(Term x, plus(S(Term w), Term v)))
+//	 = <"+c2", plus(mult(x, plus(w, v)), x)>;
 
 default tuple[str label, Term result] step(Term x) = <"NA", x>;
 
@@ -83,34 +83,28 @@ str tolatex(neg(plus(Term t, Term r))) = "-(" + tolatex(plus(t, r)) + ")";
 str tolatex(neg(mult(Term t, Term r))) = "-(" + tolatex(mult(t, r)) + ")";
 default str tolatex(neg(Term t)) = "-" + tolatex(t);
 	
-str tolatex(plus(plus(Term g, Term h), Term r)) = 
-	tolatex_p("(" + tolatex(plus(g, h)) + ")", r);
-str tolatex(plus(mult(Term g, Term h), Term r)) = 
-	tolatex_p("(" + tolatex(mult(g, h)) + ")", r);
-str tolatex(plus(neg(Term g), Term r)) = 
-	tolatex_p("-(" + tolatex(g) + ")", r);
-default str tolatex(plus(Term t, Term r)) = 
-	tolatex_p(tolatex(t), r);
+str tolatex(plus(plus(Term g, Term h), Term r)) = tolatex_p("(" + tolatex(plus(g, h)) + ")", r);
+str tolatex(plus(mult(Term g, Term h), Term r)) = tolatex_p("(" + tolatex(mult(g, h)) + ")", r);
+str tolatex(plus(neg(Term g), Term r)) = tolatex_p("-(" + tolatex(g) + ")", r);
+default str tolatex(plus(Term t, Term r)) = tolatex_p(tolatex(t), r);
 	
-str tolatex_p(str r, plus(Term g, Term h)) = r + "+" + 
-	"(" + tolatex(g) + "+" + tolatex(h) + ")";
-str tolatex_p(str r, mult(Term g, Term h)) = r + "+" + 
-	"(" + tolatex(g) + "\\cdot" + tolatex(h) + ")";
+str tolatex_p(str r, plus(Term g, Term h)) = r + "+" + "(" + tolatex(plus(g, h)) + ")";
+str tolatex_p(str r, mult(Term g, Term h)) = r + "+" + "(" + tolatex(mult(g, h)) + ")";
 default str tolatex_p(str r, Term t) = r + "+" + tolatex(t);
 
 str tolatex(mult(plus(Term g, Term h), Term r)) = 
-	tolatex_m("(" + tolatex(g) + "+" + tolatex(h) + ")", r);
+	tolatex_m("(" + tolatex(plus(g, h)) + ")", r);
 str tolatex(mult(mult(Term g, Term h), Term r)) = 
-	tolatex_m("(" + tolatex(g) + "\\cdot " + tolatex(h) + ")", r);
+	tolatex_m("(" + tolatex(mult(g, h)) + ")", r);
 str tolatex(mult(neg(Term g), Term r)) = 
 	tolatex_m("-(" + tolatex(g) + ")", r);
 default str tolatex(mult(Term t, Term r)) = 
 	tolatex_m(tolatex(t), r);
 	
 str tolatex_m(str r, plus(Term g, Term h)) = r + "\\cdot " + 
-	"(" + tolatex(g) + "+" + tolatex(h) + ")";
+	"(" + tolatex(plus(g, h)) + ")";
 str tolatex_m(str r, mult(Term g, Term h)) = r + "\\cdot " + 
-	"(" + tolatex(g) + "\\cdot " + tolatex(h) + ")";
+	"(" + tolatex(mult(g, h)) + ")";
 default str tolatex_m(str r, Term t) = r + "\\cdot " + tolatex(t);
 
 //////////////////////////////
