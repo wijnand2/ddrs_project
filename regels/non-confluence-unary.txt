@@ -1,2 +1,0 @@
-terms: plus(x,neg(x518)) *<- plus(x,S(neg(S(x518)))) ->* S(plus(x,neg(S(x518))))
-  

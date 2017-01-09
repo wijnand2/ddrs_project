@@ -2,14 +2,14 @@
 # Usage #
 #########
 # Call: python unfold.py [input_path] [output_path],
-# defaults are 'rules.trs' and 'new_rules.trs' in the current dir.
-# 'Notational devices' can be specified at the start of the rules with
-# [i, j]{n, k} syntax, where the symbols in the brackets are the variables
-# which each range from n to k. If these symbols occur in function names
-# they will also be replaced which can either produce bugs or be used as a
-# feature since functions can have numbers in them, and so this allows for
-# variable functions to occur in rules. In addition *, ', and ` can be used
-# as defined in Alban's paper.
+# input_path must be specified, output_path will default to input_path
+# but with .recipe replaced with .trs. 'Notational devices' can be specified 
+# at the start of the rules with [i, j]{n, k} syntax, where the symbols in the 
+# brackets are the variables which each range from n to k. If these symbols 
+# occur in function names they will also be replaced which can either produce 
+# bugs or be used as a feature since functions can have numbers in them, and 
+# so this allows for variable functions to occur in rules. In addition *, ', 
+# and ` can be used as defined in Albans paper.
 
 from itertools import product
 import sys

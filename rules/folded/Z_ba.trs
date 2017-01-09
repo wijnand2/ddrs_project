@@ -1,0 +1,48 @@
+(VAR x y)
+(RULES
+ba0(0) -> 0
+ba1(0) -> 1
+
+S(0) -> 1
+S(1) -> ba0(1)
+S(ba0(x)) -> ba1(x)
+S(ba1(x)) -> ba0(S(x))
+
+plus(x, 0) -> x
+plus(0, x) -> x
+plus(x, 1) -> S(x)
+plus(1, x) -> S(x)
+plus(ba0(x), ba0(y)) -> ba0(plus(x, y))
+plus(ba0(x), ba1(y)) -> S(ba0(plus(x, y)))
+plus(ba1(x), ba0(y)) -> ba1(plus(x, y))
+plus(ba1(x), ba1(y)) -> S(ba1(plus(x, y)))
+
+mult(x, 0) -> 0
+mult(x, 1) -> x
+mult(x, ba0(y)) -> plus(ba0(mult(x, y)), mult(x, 0))
+mult(x, ba1(y)) -> plus(ba0(mult(x, y)), mult(x, 1))
+
+neg(0) -> 0
+neg(neg(x)) -> x
+
+P(0) -> neg(1)
+P(1) -> 0
+P(ba0(x)) -> ba1(P(x))
+P(ba1(x)) -> ba0(x)
+P(neg(x)) -> neg(S(x))
+
+ba0(neg(x)) -> neg(ba0(x))
+ba1(neg(x)) -> neg(ba1(P(x)))
+
+plus(neg(1), x) -> P(x)
+
+plus(neg(ba0(x)), ba0(y)) -> ba0(plus(neg(x), y))
+plus(neg(ba1(x)), ba0(y)) -> P(ba0(plus(neg(x), y)))
+plus(neg(ba0(x)), ba1(y)) -> ba1(plus(neg(x), y))
+plus(neg(ba1(x)), ba1(y)) -> P(ba1(plus(neg(x), y)))
+
+mult(x, neg(y)) -> neg(mult(x, y))
+
+plus(x, neg(y)) -> neg(plus(neg(x), y))
+S(neg(x)) -> neg(P(x))
+)

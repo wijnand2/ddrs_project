@@ -1,0 +1,41 @@
+(VAR x y)
+(RULES
+N(0) -> 0
+N(neg(x)) -> neg(N(x))
+
+neg(0) -> 0
+neg(neg(x)) -> x
+
+S(S(x)) -> plus(x, N(S(0)))
+S(neg(x)) -> neg(P(x))
+S(P(x)) -> x
+
+P(0) -> neg(S(0))
+P(S(x)) -> x
+P(N(x)) -> S(P(x))
+P(neg(x)) -> neg(S(x))
+
+plus(x, 0) -> x
+plus(x, S(y)) -> plus(S(x), y)
+plus(x, N(y)) -> plus(plus(x, y), y)
+plus(x, neg(y)) -> neg(plus(neg(x), y))
+
+plus(0, x) -> x
+plus(x, 0) -> x
+plus(S(x), S(y)) -> S(S(plus(x, y)))
+plus(x, neg(S(y))) -> P(plus(x, neg(y)))
+plus(x, neg(P(y))) -> S(plus(x, neg(y)))
+plus(N(x), N(y)) -> N(plus(x, y))
+plus(N(x), neg(N(y))) -> N(plus(x, neg(y)))
+plus(neg(x), y) -> neg(plus(x, neg(y)))
+plus(plus(x, neg(y)), y) -> x
+plus(plus(x, y), neg(y)) -> x
+plus(x, neg(x)) -> 0
+plus(neg(x), x) -> 0
+
+mult(x, 0) -> 0
+mult(x, S(y)) -> plus(mult(x, y), x)
+mult(x, P(y)) -> plus(mult(x, y), neg(x))
+mult(x, N(y)) -> N(mult(x, y))
+mult(x, neg(y)) -> neg(mult(x, y))
+)

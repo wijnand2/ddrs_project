@@ -1,0 +1,52 @@
+(VAR x y z w)
+(RULES
+N(0) -> 0
+N(neg(x)) -> neg(N(x))
+
+neg(0) -> 0
+neg(neg(x)) -> x
+
+S(S(x)) -> plus(x, N(S(0)))
+S(neg(x)) -> neg(P(x))
+S(P(x)) -> x
+
+P(0) -> neg(S(0))
+P(S(x)) -> x
+P(N(x)) -> S(N(P(x)))
+P(neg(x)) -> neg(S(x))
+
+plus(x, 0) -> x
+plus(x, S(y)) -> plus(S(x), y)
+plus(x, P(y)) -> plus(P(x), y)
+plus(x, N(y)) -> plus(plus(x, y), y)
+plus(x, neg(y)) -> subt(x, y)
+plus(subt(x, y), y) -> x
+
+subt(x, 0) -> x
+subt(x, S(y)) -> subt(P(x), y)
+subt(x, P(y)) -> subt(S(x), y)
+subt(x, N(y)) -> subt(subt(x, y), y)
+subt(x, neg(y)) -> plus(x, y)
+subt(plus(x, y), y) -> x
+
+mult(x, 0) -> 0
+mult(x, S(y)) -> plus(mult(x, y), x)
+mult(x, P(y)) -> subt(mult(x, y), x)
+mult(x, N(y)) -> mult(N(x), y)
+mult(x, neg(y)) -> mult(neg(x), y)
+
+plus(x, plus(y, z)) -> plus(plus(x, y), z)
+plus(x, subt(y, z)) -> subt(plus(x, y), z)
+subt(x, subt(y, z)) -> plus(subt(x, y), z)
+subt(x, plus(y, z)) -> subt(subt(x, y), z)
+N(plus(x, y)) -> plus(N(x), N(y))
+N(subt(x, y)) -> subt(N(x), N(y))
+
+S(plus(x, y)) -> plus(S(x), y)
+S(subt(x, y)) -> subt(S(x), y)
+P(plus(x, y)) -> plus(P(x), y)
+P(subt(x, y)) -> subt(P(x), y)
+
+plus(subt(subt(x, y), w), z) -> subt(plus(subt(x, y), z), w)
+subt(plus(plus(x, y), w), z) -> plus(subt(plus(x, y), z), w)
+)
