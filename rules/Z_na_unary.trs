@@ -1,27 +1,19 @@
 (VAR x y)
 (RULES
-N(0) -> 0
-N(neg(x)) -> neg(N(x))
-
 neg(0) -> 0
 neg(neg(x)) -> x
 
-S(S(0)) -> N(S(0))
-S(S(N(x))) -> N(S(x))
 S(neg(x)) -> neg(P(x))
 
 P(0) -> neg(S(0))
 P(S(x)) -> x
-P(N(x)) -> S(P(x))
 P(neg(x)) -> neg(S(x))
 
 plus(x, 0) -> x
 plus(x, S(y)) -> plus(S(x), y)
-plus(x, N(y)) -> plus(plus(x, y), y)
 plus(x, neg(y)) -> neg(plus(neg(x), y))
 
 mult(x, 0) -> 0
 mult(x, S(y)) -> plus(mult(x, y), x)
-mult(x, N(y)) -> mult(N(x), y)
 mult(x, neg(y)) -> neg(mult(x, y))
 )
