@@ -1,0 +1,12 @@
+[n1] N(0) = 0
+
+[n2] S^2(0) = N(S(0))
+[n3] S^2(N(x)) = N(S(x))
+
+[n4] plus(x, 0) = x
+[n5] plus(x, S(y)) = plus(S(x), y)
+[n6] plus(x, N(y)) = plus(plus(x, y), sum^1(y))
+
+[n7] mult(x, 0) = 0
+[n8] mult(x, S(y)) = plus(mult(x, y), x)
+[n9] mult(x, N(y)) = mult(N(x), y)
