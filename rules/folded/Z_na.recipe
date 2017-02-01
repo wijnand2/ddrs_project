@@ -1,28 +1,28 @@
 [n1] N(0) = 0
 
-[n2] S^2(0) = N(S(0))
-[n3] S^2(N(x)) = N(S(x))
+[n2] S_2(0) = N(S(0))
+[n3] S_2(N(x)) = N(S(x))
 
 [n4] plus(x, 0) = x
-[n5] plus(x, S(y)) = plus(S(x), y)
-[n6] plus(x, N(y)) = plus(plus(x, y), sum^1(y))
+[n5] plus(x, S(y)) = S(plus(x, y))
+[n6] plus(x, N(y)) = plus^2(x, y)
 
 [n7] mult(x, 0) = 0
 [n8] mult(x, S(y)) = plus(mult(x, y), x)
-[n9] mult(x, N(y)) = mult(N(x), y)
+[n9] mult(x, N(y)) = N(mult(x, y))
 
-[n10] N(neg(x)) = neg(N(x))
+[n10] neg(0) = 0
+[n11] neg(neg(x)) = x
 
-[n11] neg(0) = 0
-[n12] neg(neg(x)) = x
+[n12] N(neg(x)) = neg(N(x))
 
 [n13] S(neg(x)) = neg(P(x))
 
 [n14] P(0) = neg(S(0))
 [n15] P(S(x)) = x
-[n16] P(N(x)) = S^1(N(P(x)))
+[n16] P(N(x)) = S_1(N(P(x)))
 [n17] P(neg(x)) = neg(S(x))
 
 [n18] plus(x, neg(y)) = neg(plus(neg(x), y))
 
-[n19] mult(x, neg(y)) = mult(neg(x), y)
+[n19] mult(x, neg(y)) = neg(mult(x, y))

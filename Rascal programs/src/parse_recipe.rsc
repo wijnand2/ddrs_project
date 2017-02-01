@@ -2,6 +2,7 @@ module parse_recipe
 
 import IO;
 import util::Eval;
+import util::Clipboard;
 import String;
 import List;
 import Map;
@@ -16,16 +17,16 @@ lexical Constant = [0-9]+;
 lexical Variable = [a-z][\'*]*;
 lexical Name = [A-Z] | [\\A-Za-z0-9][A-Za-z0-9\'*]+([.][0-9])*;
 lexical Expression = [+\-\\(\\)/\\*0-9a-z\']+;
-lexical Sum = [s][u][m];
 
 syntax Term
  = A: Constant c
  > B: Name n "()"
  | C: Variable v
  > D: Name n Variable v
- | E: Name n "(" Argument a ")"
- | F: Sum s "^" Constant c "(" Argument a ")" 
- > G: Name n "^" Expression e "(" Argument a ")"
+ | J: "plus^" Constant c "(" Argument a ")"
+ | F: "sum^" Constant c "(" Argument a ")" 
+ > G: Name n "_" Expression e "(" Argument a ")"
+ > E: Name n "(" Argument a ")"
  ;
 syntax Argument
  = Term r
@@ -47,13 +48,21 @@ syntax Equality
  = Term t "=" Term r
  ;
  
-Term F(Sum s, Constant c, Argument a) {
+Term F(Constant c, Argument a) {
 	switch("<c>") {
 		case "1": return [Term] "<a>";
 		default: return [Term] "plus(<a>, sum^<toInt("<c>")-1>(<a>))";
 	}
 } 
- 
+Term J(Constant c, Argument a) {
+	if((Argument)`<Term a>, <Term b>` := a) {
+		switch("<c>") {
+			case "1": return [Term] "plus(<a>, <b>)";
+			default: return [Term] "plus^<toInt("<c>")-1>(plus(<a>, <b>), <b>)";
+		}
+	}
+} 
+
 map[str, str] names = ("0": "Zero",
 			 		   "1": "One",
 			 		   "2": "Two",
@@ -83,30 +92,36 @@ list[Rule] to_rules(loc path) {
 		else outputLines += line;
 	}
 	outputLines = mapper(outputLines, replace_notation);
-	list[Rule] outputLines2 = [[Rule] line | str line <- outputLines];
-	outputLines2 = outermost visit(outputLines2) {
-		case (Term)`<Name f>^<Expression e>(<Argument a>)` => [Term] apply_func("<f>", "<a>", eval("<e>;")[0])
+	list[Rule] outputRules = [[Rule] line | str line <- outputLines];
+	outputRules = outermost visit(outputRules) {
+		case (Term)`<Name f>_<Expression e>(<Argument a>)`: { 
+			if("<f>" != "sum" && "<f>" != "plus") insert [Term] apply_func("<f>", "<a>", eval("<e>;")[0]);
+		}
 	}
-	return outputLines2; 
+	return outputRules; 
 }
 
 // Create a set of rules that can be used by provers like AProVE and CSI.
-void to_trs(loc path) {
+void to_trs(loc path, bool clip) {
 	list[Rule] rules = to_rules(path);
+	list[str] output = [];
 	set[str] vars = {"<v>" | /(Variable)`<Variable v>` := rules};
-	println("(VAR <intercalate(" ", [*vars])>)");
-	println("(RULES");
+	output += "(VAR <intercalate(" ", [*vars])>)";
+	output += "(RULES";
 	visit(rules) {
 		case (Rule)`[<Name _>] <Term t> = <Term r>`: {
-			println("<t> -\> <r>");
+			output += "<t> -\> <r>";
 		}
 	}
-	println(")");
+	output += ")";
+	print_lines(output);
+	if(clip) copy_lines(output);
 }
 
 // Create the step function used by GCprover.
-void to_stepfunction(loc path) {
+void to_stepfunction(loc path, bool clip) {
 	list[Rule] rules = to_rules(path);
+	list[str] output = [];
 	visit(rules) {
 		case (Rule)`[<Name n>] <Term t> = <Term r>`: {
 			t = visit(t) {
@@ -116,17 +131,20 @@ void to_stepfunction(loc path) {
 			r = visit(r) {
 				case (Term)`<Constant c>` => [Term] "<names["<c>"]>()"
 			}
-			println("tuple[str label, Term result] step(<t>) = \<\"<n>\", <r>\>;");
+			output += "tuple[str label, Term result] step(<t>) = \<\"\\\\text{<n>}\", <r>\>;";
 		}
 	}
-	println("\ndefault tuple[str label, Term result] step(Term x) = \<\"NA\", x\>;");
+	output += "\ndefault tuple[str label, Term result] step(Term x) = \<\"NA\", x\>;";
+	print_lines(output);
+	if(clip) copy_lines(output);
 }
 
 // Create the 'if' cases for the trs.
-void to_ifcases(loc path) {
+void to_ifcases(loc path, bool clip) {
 	list[Rule] rules = to_rules(path);
-	println("list[step] rewrite_outer(Term t) {");
-	println("	list[tuple[str label, Term result]] output = [];");
+	list[str] output = [];
+	output += "list[step] rewrite_outer(Term t) {";
+	output += "	list[tuple[str label, Term result]] output = [];";
 	visit(rules) {
 		case (Rule)`[<Name n>] <Term t> = <Term r>`: {
 			t = visit(t) {
@@ -136,11 +154,21 @@ void to_ifcases(loc path) {
 			r = visit(r) {
 				case (Term)`<Constant c>` => [Term] "<names["<c>"]>()"
 			}
-			println("	if(<t> := t) output += \<\"<n>\", <r>\>;");
+			output += "	if(<t> := t) output += \<\"\\\\text{<n>}\", <r>\>;";
 		}
 	}
-	println("	return output;");
-	println("}");
+	output += "	return output;";
+	output += "}";
+	print_lines(output);
+	if(clip) copy_lines(output);
+}
+
+void print_lines(list[str] lines) {
+	for(str line <- lines) println(line);
+}
+
+void copy_lines(list[str] lines) {
+	copy(intercalate("\n", lines));
 }
 
 str replaceAll(str s, list[str] find, list[str] replacement) {

@@ -16,6 +16,14 @@ import to_latex;
 public data Term
  = Zero()
  | One()
+ | Two()
+ | Three()
+ | Four()
+ | Five()
+ | Six()
+ | Seven()
+ | Eight()
+ | Nine()
  | u()
  | v()
  | w()
@@ -130,25 +138,25 @@ bool NFn(p(Term t)) = true;
 //
 //default tuple[str label, Term result] step(Term t) = <"NA", t>;
 
-tuple[str label, Term result] step(N(Zero())) = <"n1", Zero()>;
-tuple[str label, Term result] step(S(S(Zero()))) = <"n2", N(S(Zero()))>;
-tuple[str label, Term result] step(S(S(N(Term x)))) = <"n3", N(S(x))>;
-tuple[str label, Term result] step(plus(Term x, Zero())) = <"n4", x>;
-tuple[str label, Term result] step(plus(Term x, S(Term y))) = <"n5", plus(S(x), y)>;
-tuple[str label, Term result] step(plus(Term x, N(Term y))) = <"n6", plus(plus(x, y), y)>;
-tuple[str label, Term result] step(mult(Term x, Zero())) = <"n7", Zero()>;
-tuple[str label, Term result] step(mult(Term x, S(Term y))) = <"n8", plus(mult(x, y), x)>;
-tuple[str label, Term result] step(mult(Term x, N(Term y))) = <"n9", mult(N(x), y)>;
-tuple[str label, Term result] step(N(neg(Term x))) = <"n10", neg(N(x))>;
-tuple[str label, Term result] step(neg(Zero())) = <"n11", Zero()>;
-tuple[str label, Term result] step(neg(neg(Term x))) = <"n12", x>;
-tuple[str label, Term result] step(S(neg(Term x))) = <"n13", neg(P(x))>;
-tuple[str label, Term result] step(P(Zero())) = <"n14", neg(S(Zero()))>;
-tuple[str label, Term result] step(P(S(Term x))) = <"n15", x>;
-tuple[str label, Term result] step(P(N(Term x))) = <"n16", S(N(P(x)))>;
-tuple[str label, Term result] step(P(neg(Term x))) = <"n17", neg(S(x))>;
-tuple[str label, Term result] step(plus(Term x, neg(Term y))) = <"n18", neg(plus(neg(x), y))>;
-tuple[str label, Term result] step(mult(Term x, neg(Term y))) = <"n19", mult(neg(x), y)>;
+tuple[str label, Term result] step(N(Zero())) = <"\\text{n1}", Zero()>;
+tuple[str label, Term result] step(S(S(Zero()))) = <"\\text{n2}", N(S(Zero()))>;
+tuple[str label, Term result] step(S(S(N(Term x)))) = <"\\text{n3}", N(S(x))>;
+tuple[str label, Term result] step(plus(Term x, Zero())) = <"\\text{n4}", x>;
+tuple[str label, Term result] step(plus(Term x, S(Term y))) = <"\\text{n5}", S(plus(x, y))>;
+tuple[str label, Term result] step(plus(Term x, N(Term y))) = <"\\text{n6}", plus(plus(x, y), y)>;
+tuple[str label, Term result] step(mult(Term x, Zero())) = <"\\text{n7}", Zero()>;
+tuple[str label, Term result] step(mult(Term x, S(Term y))) = <"\\text{n8}", plus(mult(x, y), x)>;
+tuple[str label, Term result] step(mult(Term x, N(Term y))) = <"\\text{n9}", N(mult(x, y))>;
+tuple[str label, Term result] step(neg(Zero())) = <"\\text{n10}", Zero()>;
+tuple[str label, Term result] step(neg(neg(Term x))) = <"\\text{n11}", x>;
+tuple[str label, Term result] step(N(neg(Term x))) = <"\\text{n12}", neg(N(x))>;
+tuple[str label, Term result] step(S(neg(Term x))) = <"\\text{n13}", neg(P(x))>;
+tuple[str label, Term result] step(P(Zero())) = <"\\text{n14}", neg(S(Zero()))>;
+tuple[str label, Term result] step(P(S(Term x))) = <"\\text{n15}", x>;
+tuple[str label, Term result] step(P(N(Term x))) = <"\\text{n16}", S(N(P(x)))>;
+tuple[str label, Term result] step(P(neg(Term x))) = <"\\text{n17}", neg(S(x))>;
+tuple[str label, Term result] step(plus(Term x, neg(Term y))) = <"\\text{n18}", neg(plus(neg(x), y))>;
+tuple[str label, Term result] step(mult(Term x, neg(Term y))) = <"\\text{n19}", neg(mult(x, y))>;
 
 default tuple[str label, Term result] step(Term x) = <"NA", x>;
 

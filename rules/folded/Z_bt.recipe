@@ -1,20 +1,31 @@
-(VAR x y)
-(RULES
-neg(0) -> 0
-neg(neg(x)) -> x
+[bt1] bt(0, x) = x
+[bt2] bt(x, bt(y, z)) = bt(plus(x, y), z)
 
-S(neg(S(x))) -> neg(x)
+[bt3] plus(0, x) = x
+[bt4] plus(x, 0) = x
+[bt5] plus(1, 1) = bt(1, 0)
+[bt6] plus(x, bt(y, z)) = bt(y, plus(x, z))
+[bt7] plus(bt(x, y), z) = bt(x, plus(y, z))
 
-plus(x, 0) -> x
-plus(0, x) -> x
-plus(S(x), S(y)) -> S(S(plus(x, y)))
-plus(S(x), neg(S(y))) -> plus(x, neg(y))
-plus(neg(S(x)), S(y)) -> plus(neg(x), y)
-plus(neg(S(x)), neg(S(y))) -> neg(S(S(plus(x, y))))
+[bt8] mult(x, 0)  = 0
+[bt9] mult(0, x) = 0
+[bt10] mult(1, 1) = 1
+[bt11] mult(x, bt(y, z)) = bt(mult(x, y), mult(x, z))
+[bt12] mult(bt(x, y), z) = bt(mult(x, z), mult(y, z))
 
-mult(x, 0) -> 0
-mult(x, S(y)) -> plus(mult(x, y), x)
-mult(x, neg(S(y))) -> neg(mult(x, S(y)))
+[bt13] neg(0) = 0
+[bt14] neg(neg(x)) = x
 
-neg(S(0)) gevallen toevoegen!!!!!!1
-)
+[bt15] bt(1, neg(1)) = 1
+[bt16] bt(bt(x, 0), neg(1)) = bt(bt(x, neg(1)), 1)
+[bt17] bt(bt(x, 1), neg(1)) =  bt(bt(x, 0), 1)
+[bt18] bt(x, neg(bt(y, z))) = neg(bt(plus(y, neg(x)), z))
+[bt19] bt(neg(x), y) = neg(bt(x, neg(y)))
+
+[bt21] plus(neg(1), 1) = 0
+[bt24] plus(neg(bt(x, y)), z) = neg(bt(x, plus(y, neg(z))))
+
+[bt25] mult(x, neg(y)) = neg(mult(x, y))
+[bt26] mult(neg(x), y) = neg(mult(x, y))
+
+[\alpha] plus(x, neg(y)) = neg(plus(neg(x), y))

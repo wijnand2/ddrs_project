@@ -1,0 +1,82 @@
+\begin{table}[t]
+\hrule
+\begin{minipage}[t]{0.47\linewidth}\centering
+\begin{Lalign}
+\tag*{[dt1]}
+0\concd x&=x\\
+\tag*{[dt2}
+x\concd (y\concd z)&=(x+y)\concd z\\[2mm]
+\tag*{[dt3]}
+S(i)&=i'\\
+\tag*{[dt4]}
+S(9)&=1\concd 0\\
+\tag*{[dt5]}
+S(x\concd i)&=x\concd i'\\
+\tag*{[dt6]}
+S(x\concd 9)&=S(x)\concd 0\\[2mm]
+\tag*{[dt7]}
+x+i&=S^i(x)\\
+\tag*{[dt8]}
+x+(y\concd i)&=S^i(y\concd x)\\[2mm]
+\tag*{[dt9]}
+x\cdot 0 &=0\\
+\tag*{[dt10.$i\hspace{.4mm}]_{i=1}^9$}
+x\cdot i&=\textstyle\sum^i x\\
+\tag*{[dt11.$i\hspace{.4mm}]_{i=0}^9$}
+x\cdot (y\concd i)&=((x\cdot y)\concd 0)+(x\cdot i)
+\end{Lalign}
+\end{minipage}\vspace{4mm}
+\begin{minipage}[t]{0.52\linewidth}\centering
+\begin{Lalign}
+\label{dt12}
+\tag*{[dt12]}
+-0&=0\\
+\label{dt13}
+\tag*{[dt13]}
+-(-x)&=x
+\\[2.6mm]
+\label{dt14}
+\tag*{[dt14]}
+P(0)&=-1\\
+\label{dt15}
+\tag*{[dt15.$i\hspace{.4mm}]_{i=0}^8$}
+P(i^\prime)  &=  i\\
+\label{dt16}
+\tag*{[dt16]}
+P(x \concd 0) &= P(x) \concd 9\\
+\label{dt17}
+\tag*{[dt17.$i\hspace{.4mm}]_{i=0}^8$}
+P(x \concd i^\prime) &= x \concd i
+\\
+\label{dt18}
+\tag*{[dt18]}
+P(-x) &= -S(x)
+\\[2.6mm]
+\label{dt19}
+\tag*{[dt19]}
+S(-x) &= -P(x)
+\\[2.6mm]
+\label{dt22}
+\tag*{[dt22]}
+(-x)\concd y&=-(x\concd(-y))\\[2mm]
+\label{dt23}
+\tag*{[dt23.$i.j\hspace{.4mm}]_{i,j=1}^9$}
+i\concd (-j)&=i''\concd j^\star\\
+\label{dt24}
+\tag*{[dt24.$i.j\hspace{.4mm}]_{i,j=1}^9$}
+(x\concd i)\concd (-j)&=(x\concd i'')\concd j^\star\\
+\label{dt25}
+\tag*{[dt25]}
+x\concd (-(y\concd z))&=-((y+(-x))\concd z)\\[2mm]
+\label{dt26}
+\tag*{[dt26]}
+x + -(y) =& -(-(x) + y\\
+\label{dt28}
+\tag*{[dt28]}
+x\cdot (-y)&=-(x\cdot y)
+\end{Lalign}
+\end{minipage}
+\hrule
+\caption{}
+\label{tab:intdecview}
+\end{table}

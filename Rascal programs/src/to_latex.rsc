@@ -55,7 +55,7 @@ default str tolatex(neg(Term t)) = "-" + tolatex(t);
 	
 str tolatex(plus(plus(Term g, Term h), Term r)) = tolatex_p("(" + tolatex(plus(g, h)) + ")", r);
 str tolatex(plus(mult(Term g, Term h), Term r)) = tolatex_p("(" + tolatex(mult(g, h)) + ")", r);
-str tolatex(plus(neg(Term g), Term r)) = tolatex_p("-(" + tolatex(g) + ")", r);
+str tolatex(plus(neg(Term g), Term r)) = tolatex_p("(" + tolatex(neg(g)) + ")", r);
 default str tolatex(plus(Term t, Term r)) = tolatex_p(tolatex(t), r);
 	
 str tolatex_p(str r, plus(Term g, Term h)) = r + "+" + "(" + tolatex(plus(g, h)) + ")";
@@ -69,7 +69,7 @@ str tolatex(mult(plus(Term g, Term h), Term r)) =
 str tolatex(mult(mult(Term g, Term h), Term r)) = 
 	tolatex_m("(" + tolatex(mult(g, h)) + ")", r);
 str tolatex(mult(neg(Term g), Term r)) = 
-	tolatex_m("-(" + tolatex(g) + ")", r);
+	tolatex_m("(" + tolatex(neg(g)) + ")", r);
 default str tolatex(mult(Term t, Term r)) = 
 	tolatex_m(tolatex(t), r);
 	
