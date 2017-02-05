@@ -50,10 +50,25 @@ Term replace(Term t, int i, Term l) {
 // Returns a list of rewriting steps applicable to the outer function call.
 list[step] rewrite_outer(Term t) {
 	list[tuple[str label, Term result]] output = [];
-	if(plus(Zero(), Zero()) := t) output += <"1", Zero()>;
-	if(plus(S(Term r), Term l) := t) output += <"2", S(plus(r, l))>; 
-	if(plus(Term r, S(Term l)) := t) output += <"3", S(plus(r, l))>;  
-	if(plus(S(Term r), S(Term l)) := t) output += <"test", N(plus(r, l))>;
+	if(N(Zero()) := t) output += <"\\text{n1}", Zero()>;
+	if(S(S(Zero())) := t) output += <"\\text{n2}", N(S(Zero()))>;
+	if(S(S(N(Term x))) := t) output += <"\\text{n3}", N(S(x))>;
+	if(plus(Term x, Zero()) := t) output += <"\\text{n4}", x>;
+	if(plus(Term x, S(Term y)) := t) output += <"\\text{n5}", S(plus(x, y))>;
+	if(plus(Term x, N(Term y)) := t) output += <"\\text{n6}", plus(plus(x, y), y)>;
+	if(mult(Term x, Zero()) := t) output += <"\\text{n7}", Zero()>;
+	if(mult(Term x, S(Term y)) := t) output += <"\\text{n8}", plus(mult(x, y), x)>;
+	if(mult(Term x, N(Term y)) := t) output += <"\\text{n9}", N(mult(x, y))>;
+	if(neg(Zero()) := t) output += <"\\text{n10}", Zero()>;
+	if(neg(neg(Term x)) := t) output += <"\\text{n11}", x>;
+	if(N(neg(Term x)) := t) output += <"\\text{n12}", neg(N(x))>;
+	if(S(neg(Term x)) := t) output += <"\\text{n13}", neg(P(x))>;
+	if(P(Zero()) := t) output += <"\\text{n14}", neg(S(Zero()))>;
+	if(P(S(Term x)) := t) output += <"\\text{n15}", x>;
+	if(P(N(Term x)) := t) output += <"\\text{n16}", S(N(P(x)))>;
+	if(P(neg(Term x)) := t) output += <"\\text{n17}", neg(S(x))>;
+	if(plus(Term x, neg(Term y)) := t) output += <"\\text{n18}", neg(plus(neg(x), y))>;
+	if(mult(Term x, neg(Term y)) := t) output += <"\\text{n19}", neg(mult(x, y))>;
 	return output;
 }
 

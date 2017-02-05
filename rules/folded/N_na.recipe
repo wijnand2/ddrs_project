@@ -1,7 +1,7 @@
 [n1] N(0) = 0
 
-[n2] S^2(0) = N(S(0))
-[n3] S^2(N(x)) = N(S(x))
+[n2] S_2(0) = N(S(0))
+[n3] S_2(N(x)) = N(S(x))
 
 [n4] plus(x, 0) = x
 [n5] plus(x, S(y)) = plus(S(x), y)

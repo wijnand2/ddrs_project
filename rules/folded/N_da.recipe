@@ -1,0 +1,16 @@
+[d1.i]{0..9} dai(0) = i
+
+[d2.i]{0..8} S(i) = i'
+[d3] S(9) = da0(1)
+[d4.i]{0..8} S(dai(x)) = dai'(x)
+[d5] S(da9(x)) = da0(S(x))
+
+[d6] plus(x, 0) = x
+[d7] plus(0, x) = x
+[d8.i]{1..9} plus(x, i) = S_i(x)
+[d9.i]{1..9} plus(i, x) = S_i(x)
+[d10.i.j]{0..9} plus(dai(x), daj(y)) = S_j(dai(plus(x,y)))
+
+[d11] mult(x, 0) = 0
+[d12.i]{0..8} mult(x, i') = plus(mult(x,i), x)
+[d13.i]{0..9} mult(x, dai(y)) = plus(da0(mult(x,y)), mult(x,i))

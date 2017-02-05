@@ -1,0 +1,16 @@
+[b1.i]{0..1} bai(0) = i
+
+[b2] S(0) = 1
+[b3] S(1) = ba0(1)
+[b4] S(ba0(x)) = ba1(x)
+[b5] S(ba1(x)) = ba0(S(x))
+
+[b6] plus(x, 0) = x
+[b7] plus(0, x) = x
+[b8] plus(x, 1) = S(x)
+[b9] plus(1, x) = S(x)
+[b10.i.j]{0..1} plus(bai(x), baj(y)) = S_j(bai(plus(x, y)))
+
+[b11] mult(x, 0) = 0
+[b12] mult(x, 1) = x
+[b13.i]{0..1} mult(x, bai(y)) = plus(ba0(mult(x, y)), mult(x, i))
