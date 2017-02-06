@@ -65,6 +65,16 @@ default bool is_var(Term t) = false;
 //bool NFp(w()) = true;
 //bool NFp(p(Term t)) = true;
 
+bool NF(Zero()) = true;
+default bool NF(Term t) = NFp(t) || NFm(t);
+
+bool NFp(S(Zero())) = true;
+bool NFp(S(S(Term t))) = NFp(S(t));
+default bool NFp(Term t) = false;
+
+bool NFm(neg(Term t)) = NFp(t);
+default bool NFm(Term t) = false;
+
 // Returns true if the given term is in normal form.
 bool NF(Zero()) = true;
 default bool NF(Term t) = NFs(t) || NFn(t) || NFm(t);
@@ -235,6 +245,22 @@ list[Term] handle_case(Term t, list[Term] vars, bool first) {
 			print("the term $<tolatex(t)>$ could not be resolved.\n");
 			counterexamples += t;
 		}
+	}
+	return counterexamples;
+}
+
+list[Term] handle_case(Term t, list[Term] vars) {
+	list[Term] counterexamples = [];
+	if(NF(t)) return [];
+	else if(<s, r> := step(t)) {
+		if(s != "NA") return [];
+		else if(vars != []) {
+			Term v = vars[-1];
+			for(<Term r, Term l> <- case_distinction(t, v)) {
+				counterexamples += handle_case(r, vars - v, false);
+			}
+		}
+		else counterexamples += t;
 	}
 	return counterexamples;
 }

@@ -24,7 +24,7 @@ data Term
  | N(Term r)
  | ba0(Term r)
  | ba1(Term r)
- | plus(Term r,  Term l)
+ | plus(Term r, Term l)
  | mult(Term r, Term l)
  | neg(Term r)
  ;

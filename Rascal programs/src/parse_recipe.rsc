@@ -33,7 +33,7 @@ syntax Argument
  | Argument a "," Argument a
  ;
 syntax Rule 
- = Label l Equality e
+ = Label l Equation e
  | Whitespace
  ;
 syntax Label
@@ -44,7 +44,7 @@ syntax ItVars
  = "." Variable v
  | ItVars i ItVars j
  ;
-syntax Equality
+syntax Equation
  = Term t "=" Term r
  ;
  
@@ -81,7 +81,7 @@ map[str, str] names = ("0": "Zero",
 list[Rule] to_rules(loc path) {
 	list[str] outputLines = []; 
 	for(str line <- readFileLines(path)) {
-		if((Rule)`[<Name n><ItVars i>]{<Constant c>..<Constant k>} <Equality e>` := [Rule] line) {
+		if((Rule)`[<Name n><ItVars i>]{<Constant c>..<Constant k>} <Equation e>` := [Rule] line) {
 			list[str] itvars = ["<v>" | /(ItVars)`.<Variable v>` := i]; 
 			line = "[<n><i>] <e>";
 			value range = eval("[<c>..<k>+1];")[0];
